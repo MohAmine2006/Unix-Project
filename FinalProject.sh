@@ -10,9 +10,28 @@ do
 	case $option in 
 		"System Status")
 			System_Status
+			PS3="Enter your choice [1-7] "
+			echo "M A I N - M E N U"
+			echo "1) System Status"
+			echo "2) Backup"
+			echo "3) Network"
+			echo "4) Services"
+			echo "5) User Management"
+			echo "6) File Management"
+			echo "7) Exit"
+
 		;;
 		"Backup")
 			Backup
+			PS3="Enter your choice [1-7] "
+			echo "M A I N - M E N U"
+			echo "1) System Status"
+			echo "2) Backup"
+			echo "3) Network"
+			echo "4) Services"
+			echo "5) User Management"
+			echo "6) File Management"
+			echo "7) Exit"
 		;;
 		"Network")
 			Network
@@ -40,7 +59,7 @@ done
 #System Status
 System_Status() {
 echo "S Y S T E M - S T A T U S"
-PS3="Enter an option [1-4] "
+PS3="Enter an option [1-5] "
 ssMenu=("Memory Status" "CPU Temperature" "Active Processes" "Stop and Close Process" "Main Menu")
 select option in "${ssMenu[@]}"
 do
@@ -61,7 +80,6 @@ do
 			echo "Going Back to Main Menu..."
 			echo ""
 			break
-			Main_Menu_Function
 			#Error Here if you go to back to main menu and exit it doesnt work
 		;;
 		*)
@@ -88,7 +106,7 @@ do
 		"Main Menu")
 			echo "Going Back to Main Menu..."
 			echo ""
-			Main_Menu_Function
+			break
 			#Error Here if you go to back to main menu and exit it doesnt work
 		;;
 		*)
