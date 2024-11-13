@@ -116,10 +116,57 @@ do
 done
 }
 
-#Network
+#Network -- I didnt finish the 4th case.
 Network() {
-echo "Network"
+        echo "== NETWORK MENU =="
+        echo "1. Show network cards, IP adresses, and default gateways"
+        echo "2. Enable/Disable a network card "
+        echo "3. Set an IP adress on a network card"
+        echo "4. Connect to a nearby wifi network"
+        echo "5. Exit to the main menu"
+        read -p "Select an option: " option
+
+        case $option in
+                1)
+                echo "Network cards and IP adresses: " 
+                ip -brief address show
+                echo "Default gateways: "
+                ip route | grep default
+                ;;
+                2)
+                echo "Here are the available network cards: "
+                ip -brief address show
+                read -p "Choose a network card: " card
+                read -p "Do you want to enable or disable it? (e/d) " ed
+                if [ "$ed" == "e" ]; then
+                        sudo ip link set "$card" up
+                        echo ""$card" enabled"
+                else if [ "$ed" == "d" ]; then
+                        sudo ip link set "$card" down
+                        echo ""$card" disabled"
+                else
+                        echo "Error: wrong input. Please answer with 'e' or 'd'"
+                fi
+                ;;
+                3)
+                echo "Here are the available network cards: " 
+                ip -brief address show
+                read -p "Select a network card to set the IP adress on: " card
+                read -p "Enter an IP address: " ip
+                sudo ip addr add "$ip" dev "$card"
+                echo "IP address "$ip" has been set on "$card""
+                ;;
+                4)
+                ;;
+                5)
+		Main_Menu_Functions
+                ;;
+                *)
+                echo "Invalid option. Please choose between option 1 to 5"
+                ;;
+        esac
 }
+
 
 #Services
 Services() {
